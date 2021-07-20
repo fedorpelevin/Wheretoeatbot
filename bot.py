@@ -9,7 +9,7 @@ from service import (
     count_restaurants
 )
 
-bot = telebot.TeleBot('1945923963:AAEdly_u4VVAGAeqffI4VHHhCH3X8o5GajM')
+bot = telebot.TeleBot('')
 
 
 @bot.message_handler(commands=['start', 'help'])
@@ -58,7 +58,6 @@ def callback_handler(call):
 def send_all_restaurants(city: str, call):
     restaurants = find_random_restaurant(city, many=True)
     restaurants = restaurants[:min(15, len(restaurants))]  # Количество выводимых ресторанов
-    print(f'Ресторанов в {city}:', len(restaurants))
     msg = 'Мы нашли вам несколько рестаранов:\n\t' + '\n\t'.join(
         [f'Ресторан "{name}". Место: {place}' for name, place in restaurants])
     bot.send_message(call.from_user.id, msg)
